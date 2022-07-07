@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/fragments :: head"></head>
+<body>
+<div th:replace="fragments/fragments :: navbar" ></div>
+
+<main role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Tech Talent Store</h1>
+            <p>This is a small e-commerce application that allows the user to purchase some of a few products that are offered here. </p>
+            <p><a class="btn btn-primary btn-lg" href="/about" role="button">Learn more &raquo;</a></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card mb-3 large-product-card">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                    <img th:alt="${product.name}" th:src="@{${product.image}}" class="card-img" style="max-height: 100%; object-fit: cover;" />
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4 th:text="${product.name}" style="margin-bottom: 0;">Laptop</h4>
+                            <small th:text="${product.getBrand()}">Apple</small>
+                        </div>
+                        <h5 class="card-text" th:text="${#numbers.formatCurrency(product.price)}">$800</h5>
+                        <p class="card-text" th:text="${product.description}"></p>
+                        <form th:action="@{/cart}" th:object="${product}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
+
+
