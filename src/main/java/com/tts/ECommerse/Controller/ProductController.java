@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-public class ProductController {
+public class ProductController<Product> {
     @Autowired
     ProductService productService;
 
     @GetMapping("/product/(id)")
     public String show(@PathVariable int id, Model model) {
-        Product product = productService.findById(id);
-p        return "product";
+        Product product = (Product) productService.findById(id);
+        return "product";
     }
 }
